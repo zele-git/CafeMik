@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kahvila Mikaela – Aito kahvikokemus</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5ECD7;
+    --espresso: #2C1A0E;
+    --caramel: #C97B3A;
+    --latte: #D4A96A;
+    --foam: #FBF5E6;
+    --dark: #1A0F06;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--foam);
+    color: var(--espresso);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(44, 26, 14, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(201,123,58,0.3);
+  }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+
+  .logo-svg { width: 44px; height: 44px; }
+
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--latte);
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links {
+    display: flex; gap: 2.5rem; list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    transition: opacity 0.2s, color 0.2s;
+  }
+
+  .nav-links a:hover { opacity: 1; color: var(--caramel); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--espresso);
+    display: flex; align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: 
+      radial-gradient(ellipse 60% 70% at 70% 50%, rgba(201,123,58,0.15) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 50% at 20% 80%, rgba(212,169,106,0.08) 0%, transparent 60%);
+  }
+
+  /* Coffee ring decorations */
+  .ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(201,123,58,0.12);
+    animation: spin 40s linear infinite;
+  }
+  .ring1 { width: 600px; height: 600px; right: -100px; top: -100px; }
+  .ring2 { width: 400px; height: 400px; right: 50px; top: 50px; animation-direction: reverse; border-color: rgba(212,169,106,0.08); }
+  .ring3 { width: 200px; height: 200px; right: 200px; top: 200px; animation-duration: 25s; }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 8rem 4rem 4rem;
+    max-width: 700px;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    background: rgba(201,123,58,0.2);
+    border: 1px solid rgba(201,123,58,0.4);
+    color: var(--caramel);
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    border-radius: 2px;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.8s ease forwards;
+    opacity: 0;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 7vw, 6rem);
+    color: var(--cream);
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.8s 0.2s ease forwards;
+    opacity: 0;
+  }
+
+  .hero h1 em {
+    color: var(--caramel);
+    font-style: italic;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+    color: rgba(245,236,215,0.7);
+    line-height: 1.8;
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.8s 0.4s ease forwards;
+    opacity: 0;
+    font-weight: 300;
+  }
+
+  .hero-btns {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.6s ease forwards;
+    opacity: 0;
+  }
+
+  .btn-primary {
+    background: var(--caramel);
+    color: var(--dark);
+    padding: 0.9rem 2rem;
+    border: none; border-radius: 3px;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.2s;
+    font-weight: 700;
+  }
+  .btn-primary:hover { background: var(--latte); transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--cream);
+    padding: 0.9rem 2rem;
+    border: 1px solid rgba(245,236,215,0.4);
+    border-radius: 3px;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--caramel); color: var(--caramel); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ABOUT STRIP */
+  .strip {
+    background: var(--caramel);
+    padding: 1.2rem 4rem;
+    display: flex; gap: 3rem; justify-content: center; align-items: center;
+    flex-wrap: wrap;
+  }
+  .strip-item {
+    display: flex; align-items: center; gap: 0.6rem;
+    color: var(--dark);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .strip-item span { font-size: 1.2rem; }
+
+  /* SECTIONS */
+  section { padding: 6rem 4rem; }
+
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--caramel);
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+  }
+
+  /* MENU */
+  .menu-section { background: var(--foam); }
+  
+  .menu-header { max-width: 500px; margin-bottom: 4rem; }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .menu-category {
+    background: white;
+    border-radius: 4px;
+    padding: 2rem;
+    border: 1px solid rgba(201,123,58,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .menu-category::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--caramel);
+  }
+
+  .menu-category:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(44,26,14,0.1);
+  }
+
+  .category-icon { font-size: 2rem; margin-bottom: 1rem; }
+
+  .menu-category h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+    color: var(--espresso);
+  }
+
+  .menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed rgba(201,123,58,0.2);
+  }
+  .menu-item:last-child { border-bottom: none; }
+
+  .item-name { font-size: 0.9rem; color: var(--espresso); }
+  .item-desc { font-size: 0.75rem; color: #888; margin-top: 0.1rem; }
+  .item-price {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--caramel);
+    white-space: nowrap;
+    margin-left: 1rem;
+  }
+
+  /* STORY */
+  .story-section {
+    background: var(--espresso);
+    color: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .story-visual {
+    position: relative;
+    display: flex; justify-content: center; align-items: center;
+  }
+
+  .coffee-cup-svg { width: 260px; height: 260px; opacity: 0.9; }
+
+  .story-content .section-title { color: var(--cream); }
+
+  .story-content p {
+    color: rgba(245,236,215,0.75);
+    line-height: 1.9;
+    font-size: 1rem;
+    font-weight: 300;
+    margin-bottom: 1.2rem;
+  }
+
+  /* SERVICES */
+  .services-section { background: white; }
+  
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .service-card {
+    padding: 2rem;
+    background: var(--foam);
+    border-radius: 4px;
+    border: 1px solid rgba(201,123,58,0.15);
+    text-align: center;
+    transition: transform 0.3s;
+  }
+  .service-card:hover { transform: translateY(-3px); }
+  .service-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+  .service-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    margin-bottom: 0.7rem;
+    color: var(--espresso);
+  }
+  .service-card p { font-size: 0.9rem; color: #777; line-height: 1.7; }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .contact-info { }
+
+  .contact-detail {
+    display: flex; align-items: flex-start; gap: 1rem;
+    margin-bottom: 1.8rem;
+  }
+  .contact-detail .icon { font-size: 1.3rem; margin-top: 0.1rem; }
+  .contact-detail h4 {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--caramel);
+    margin-bottom: 0.3rem;
+    font-weight: 700;
+  }
+  .contact-detail p { font-size: 0.95rem; color: var(--espresso); line-height: 1.6; }
+
+  .contact-form-wrap { }
+
+  .form-group { margin-bottom: 1.2rem; }
+
+  .form-group label {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--caramel);
+    margin-bottom: 0.4rem;
+    font-weight: 700;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid rgba(201,123,58,0.3);
+    border-radius: 3px;
+    background: white;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.95rem;
+    color: var(--espresso);
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus { border-color: var(--caramel); }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    color: rgba(245,236,215,0.6);
+    padding: 3rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--latte);
+  }
+
+  footer p { font-size: 0.8rem; }
+
+  /* TOAST */
+  .toast {
+    position: fixed; bottom: 2rem; right: 2rem;
+    background: var(--caramel); color: var(--dark);
+    padding: 1rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.4s;
+    z-index: 1000;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .story-section, .contact-section { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-content { padding: 7rem 1.5rem 3rem; }
+    .strip { padding: 1rem 1.5rem; gap: 1.5rem; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
+    .story-visual { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <svg class="logo-svg" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Cup -->
+      <ellipse cx="22" cy="30" rx="12" ry="4" fill="none" stroke="#C97B3A" stroke-width="1.5"/>
+      <path d="M10 26 Q10 38 22 38 Q34 38 34 26" fill="none" stroke="#C97B3A" stroke-width="1.5"/>
+      <line x1="10" y1="26" x2="34" y2="26" stroke="#C97B3A" stroke-width="1.5"/>
+      <!-- Handle -->
+      <path d="M34 27 Q42 27 42 31 Q42 35 34 35" fill="none" stroke="#C97B3A" stroke-width="1.5"/>
+      <!-- Steam -->
+      <path d="M16 22 Q17 18 16 14" fill="none" stroke="#D4A96A" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M22 21 Q23 17 22 13" fill="none" stroke="#D4A96A" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M28 22 Q29 18 28 14" fill="none" stroke="#D4A96A" stroke-width="1.2" stroke-linecap="round"/>
+      <!-- Saucer -->
+      <ellipse cx="22" cy="39" rx="14" ry="2.5" fill="none" stroke="#C97B3A" stroke-width="1.5"/>
+    </svg>
+    <span class="nav-brand">Kahvila Mikaela</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#tarina">Tarina</a></li>
+    <li><a href="#palvelut">Palvelut</a></li>
+    <li><a href="#yhteystiedot">Yhteystiedot</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="ring ring1"></div>
+  <div class="ring ring2"></div>
+  <div class="ring ring3"></div>
+  <div class="hero-content">
+    <div class="hero-tag">✦ Tervetuloa ✦</div>
+    <h1>Aito kahvi.<br><em>Lämmin tunnelma.</em></h1>
+    <p>Kahvila Mikaela tarjoaa sinulle hetken hengähdystaukoa arjen kiireestä. Käsintehtyjä juomia, tuoreita herkkuja ja kodikas ilmapiiri.</p>
+    <div class="hero-btns">
+      <a href="#menu" class="btn-primary">Tutustu menuun</a>
+      <a href="#yhteystiedot" class="btn-outline">Ota yhteyttä</a>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-item"><span>☕</span> Erikoiskahvit</div>
+  <div class="strip-item"><span>🧁</span> Tuoreet leivonnaiset</div>
+  <div class="strip-item"><span>🌿</span> Kasvisvaihtoehtoja</div>
+  <div class="strip-item"><span>🎉</span> Yksityistilaisuudet</div>
+</div>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="menu-header">
+    <p class="section-label">◈ Meidän menu</p>
+    <h2 class="section-title">Jokainen kuppi<br>on taideteos</h2>
+  </div>
+
+  <div class="menu-grid">
+    <div class="menu-category">
+      <div class="category-icon">☕</div>
+      <h3>Kahvijuomat</h3>
+      <div class="menu-item"><div><div class="item-name">Espresso</div></div><span class="item-price">2,50 €</span></div>
+      <div class="menu-item"><div><div class="item-name">Cappuccino</div></div><span class="item-price">3,50 €</span></div>
+      <div class="menu-item"><div><div class="item-name">Latte Macchiato</div></div><span class="item-price">4,00 €</span></div>
+      <div class="menu-item"><div><div class="item-name">Flat White</div></div><span class="item-price">4,00 €</span></div>
+      <div class="menu-item"><div><div class="item-name">Filtteri kahvi</div></div><span class="item-price">2,80 €</span></div>
+    </div>
+
+    <div class="menu-category">
+      <div class="category-icon">🍵</div>
+      <h3>Teet & Erikoisjuomat</h3>
+      <div class="menu-item"><div><div class="item-name">Yrttitee</div></div><span class="item-price">2,50 €</span></div>
+      <div class="menu-item"><div><div class="item-name">Matcha Latte</div></div><span class="item-price">4,50 €</span></div>
+      <div class="menu-item"><div><div class="item-name">Chai Latte</div></div><span class="item-price">4,20 €</span></div>
+      <div class="menu-item"><div><div class="item-name">Kuuma kaakao</div></div><span class="item-price">3,50 €</span></div>
+      <div class="menu-item"><div><div class="item-name">Tuoremehu</div></div><span class="item-price">3,00 €</span></div>
+    </div>
+
+    <div class="menu-category">
+      <div class="category-icon">🥐</div>
+      <h3>Leivonnaiset</h3>
+      <div class="menu-item"><div><div class="item-name">Croissant</div></div><span class="item-price">3,20 €</span></div>
+      <div class="menu-item"><div><div class="item-name">Korvapuusti</div></div><span class="item-price">2,80 €</span></div>
+      <div class="menu-item"><div><div class="item-name">Kuppikakku</div></div><span class="item-price">3,50 €</span></div>
+      <div class="menu-item"><div><div class="item-name">Brownie</div></div><span class="item-price">3,80 €</span></div>
+      <div class="menu-item"><div><div class="item-name">Päivän piirakka</div></div><span class="item-price">4,50 €</span></div>
+    </div>
+
+    <div class="menu-category">
+      <div class="category-icon">🥪</div>
+      <h3>Suolaiset</h3>
+      <div class="menu-item"><div><div class="item-name">Voileipä</div></div><span class="item-price">5,50 €</span></div>
+      <div class="menu-item"><div><div class="item-name">Täytetty bagel</div></div><span class="item-price">6,50 €</span></div>
+      <div class="menu-item"><div><div class="item-name">Quiche</div></div><span class="item-price">5,80 €</span></div>
+      <div class="menu-item"><div><div class="item-name">Salaattiannos</div></div><span class="item-price">8,00 €</span></div>
+      <div class="menu-item"><div><div class="item-name">Keitto + leipä</div></div><span class="item-price">9,00 €</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story-section" id="tarina">
+  <div class="story-visual">
+    <svg class="coffee-cup-svg" viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Decorative rings -->
+      <circle cx="130" cy="130" r="120" stroke="rgba(201,123,58,0.1)" stroke-width="1"/>
+      <circle cx="130" cy="130" r="90" stroke="rgba(201,123,58,0.08)" stroke-width="1"/>
+      <!-- Cup body -->
+      <path d="M70 110 L80 190 Q80 210 130 210 Q180 210 180 190 L190 110 Z" fill="rgba(201,123,58,0.15)" stroke="#C97B3A" stroke-width="2"/>
+      <!-- Saucer -->
+      <ellipse cx="130" cy="215" rx="70" ry="10" fill="rgba(201,123,58,0.1)" stroke="#C97B3A" stroke-width="2"/>
+      <!-- Coffee surface -->
+      <ellipse cx="130" cy="110" rx="60" ry="12" fill="rgba(44,26,14,0.4)" stroke="#C97B3A" stroke-width="1.5"/>
+      <!-- Latte art: simple heart -->
+      <path d="M118 108 Q122 103 130 108 Q138 103 142 108 Q142 116 130 120 Q118 116 118 108Z" fill="rgba(212,169,106,0.5)"/>
+      <!-- Handle -->
+      <path d="M190 130 Q220 130 220 150 Q220 170 190 170" fill="none" stroke="#C97B3A" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- Steam lines -->
+      <path d="M105 90 Q108 75 105 60" fill="none" stroke="#D4A96A" stroke-width="2" stroke-linecap="round"/>
+      <path d="M130 85 Q133 70 130 55" fill="none" stroke="#D4A96A" stroke-width="2" stroke-linecap="round"/>
+      <path d="M155 90 Q158 75 155 60" fill="none" stroke="#D4A96A" stroke-width="2" stroke-linecap="round"/>
+      <!-- Text -->
+      <text x="130" y="240" text-anchor="middle" fill="rgba(212,169,106,0.7)" font-size="10" font-family="Playfair Display, serif" letter-spacing="3">MIKAELA</text>
+    </svg>
+  </div>
+
+  <div class="story-content">
+    <p class="section-label">◈ Meidän tarina</p>
+    <h2 class="section-title">Kahvi yhdistää<br>ihmisiä</h2>
+    <p>Kahvila Mikaela syntyi unelmasta luoda paikka, jossa jokainen tuntee olevansa tervetullut. Omistajamme Melku Aster Assefa tuo mukanaan sydämen lämmöllä tehdyn kahvikulttuurin.</p>
+    <p>Jokainen kuppi kahviamme on huolella valmistettu tuoreista, laadukkaista raaka-aineista. Uskomme, että hyvä kahvi on enemmän kuin juoma – se on kokemus, hetki, muisto.</p>
+    <a href="#palvelut" class="btn-primary">Meidän palvelut</a>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section" id="palvelut">
+  <div style="text-align: center; max-width: 600px; margin: 0 auto 1rem;">
+    <p class="section-label">◈ Palvelumme</p>
+    <h2 class="section-title">Mitä tarjoamme</h2>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">☕</div>
+      <h3>Erikoiskahvit</h3>
+      <p>Barista-tason espressopohjaisia juomia ja erikoiskahveja. Saatavilla myös kasvipohjaiset maitovaihtoehdot.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🧁</div>
+      <h3>Tuoreet herkkuja</h3>
+      <p>Päivittäin tuoreita leivonnaisia, kakkuja ja suolaisia välipaloja. Valikoima vaihtelee sesongin mukaan.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🎉</div>
+      <h3>Yksityistilaisuudet</h3>
+      <p>Varaa kahvila yksityistilaisuuksia varten – syntymäpäivät, kokoukset tai muut erityistapahtumat.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🛍️</div>
+      <h3>Take Away</h3>
+      <p>Kiireinen? Tilaa juomasi mukaan. Nopea palvelu ja kestävät take away -pakkaukset.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💻</div>
+      <h3>Etätyötila</h3>
+      <p>Ilmainen WiFi ja rauhallinen ympäristö työskentelyyn tai opiskeluun. Pistorasioita saatavilla.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🎁</div>
+      <h3>Lahjakortit</h3>
+      <p>Osta läheisellesi kahvikokemuksen lahjana. Lahjakortit saatavilla eri arvoissa.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="yhteystiedot">
+  <div class="contact-info">
+    <p class="section-label">◈ Löydä meidät</p>
+    <h2 class="section-title">Tule käymään</h2>
+
+    <div class="contact-detail">
+      <div class="icon">📍</div>
+      <div>
+        <h4>Osoite</h4>
+        <p>Kahvila Mikaela<br>Helsinki, Suomi</p>
+      </div>
+    </div>
+
+    <div class="contact-detail">
+      <div class="icon">🕐</div>
+      <div>
+        <h4>Aukioloajat</h4>
+        <p>Ma–Pe: 7:30 – 18:00<br>La: 8:00 – 17:00<br>Su: 9:00 – 15:00</p>
+      </div>
+    </div>
+
+    <div class="contact-detail">
+      <div class="icon">📧</div>
+      <div>
+        <h4>Sähköposti</h4>
+        <p>info@kahvilamikaela.fi</p>
+      </div>
+    </div>
+
+    <div class="contact-detail">
+      <div class="icon">🏢</div>
+      <div>
+        <h4>Y-tunnus</h4>
+        <p>3594475-7</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-form-wrap">
+    <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--espresso);">Lähetä viesti</h3>
+    <div class="form-group">
+      <label>Nimesi</label>
+      <input type="text" placeholder="Maija Virtanen">
+    </div>
+    <div class="form-group">
+      <label>Sähköposti</label>
+      <input type="email" placeholder="maija@esimerkki.fi">
+    </div>
+    <div class="form-group">
+      <label>Aihe</label>
+      <input type="text" placeholder="Varaus tai kysymys">
+    </div>
+    <div class="form-group">
+      <label>Viesti</label>
+      <textarea placeholder="Kirjoita viestisi tähän..."></textarea>
+    </div>
+    <button class="btn-primary" onclick="sendMessage()" style="width: 100%; padding: 1rem;">Lähetä viesti</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand">Kahvila Mikaela</div>
+    <p style="margin-top: 0.4rem;">Omistaja: Melku Aster Assefa</p>
+  </div>
+  <p>© 2026 Kahvila Mikaela · Y-tunnus 3594475-7</p>
+  <p>Valmistettu ❤️ Helsingissä</p>
+</footer>
+
+<div class="toast" id="toast">✓ Viesti lähetetty! Palaamme pian.</div>
+
+<script>
+  function sendMessage() {
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3500);
+  }
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+</body>
+</html>
